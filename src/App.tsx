@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import './App.scss';
+import { AppBlock, Nav } from './elements'
+import FormComponentFunc from "./components/FormComponentFunc/FormComponentFunc";
+import GameDesignersFunc from "./components/GameDesignersFunc/GameDesignersFunc";
+import ToDoComponentFunc from "./components/ToDoComponentFunc/ToDoComponentFunc";
 
-function App() {
+const App : React.FC = () => {
+  const [ currentPage, setCurrentPage ] : React.ComponentState = useState('clear');
   return (
-    <div className="App">
+    <AppBlock>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Nav>
+          <button onClick={() => {
+            setCurrentPage('clear');
+          }}>Clear</button>
+          <button onClick={() => {
+            setCurrentPage('game_designers');
+          }}>Game Designers</button>
+          <button onClick={() => {
+            setCurrentPage('form');
+          }}>Form</button>
+          <button onClick={() => {
+            setCurrentPage('todo');
+          }}>ToDo</button>
+        </Nav>
       </header>
-    </div>
+      { currentPage === 'clear' ? null : null }
+      { currentPage === 'game_designers' ? <GameDesignersFunc /> : null }
+      { currentPage === 'form' ? <FormComponentFunc /> : null }
+      { currentPage === 'todo' ? <ToDoComponentFunc /> : null }
+    </AppBlock>
   );
 }
 
