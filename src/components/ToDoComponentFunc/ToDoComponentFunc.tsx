@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import './ToDoComponentFunc.scss'
+import '../../App.scss';
+import { ToDoWrapper, ToDoTopBlock, ToDoForm, ToDoInput, ToDoButton, ToDoErrorBlock, ToDoItems, ToDoItem } from "./elements";
 
 const ToDoComponentFunc: React.FC = () => {
   const [name, setName] : React.ComponentState = useState('');
@@ -68,26 +69,26 @@ const ToDoComponentFunc: React.FC = () => {
   }
 
   return(
-    <div className="wrapper">
-      <div className="topBlock">
-        <form className="form">
-          <input type="text" name="name" id="name" className='form-input' value={name} placeholder={'Name'} onChange={onChangeHumanName} required />
-          <input type="text" name="age" id="age" className="form-input" value={age} placeholder={'Age'} onChange={onChangeAge} required />
+    <ToDoWrapper>
+      <ToDoTopBlock>
+        <ToDoForm>
+          <ToDoInput type="text" name="name" id="name" value={name} placeholder={'Name'} onChange={onChangeHumanName} required />
+          <ToDoInput type="text" name="age" id="age" value={age} placeholder={'Age'} onChange={onChangeAge} required />
           { ageError !== '' && <span>{ageError}</span> }
-          <input type="text" name="occupation" id="occupation" className="form-input" value={occupation} placeholder={'Occupation'} onChange={onChangeOccupation} required />
-          <div className={blockClass}></div>
-          <input type="submit" name="submit" id="submit" className={'form-btn'} value={'Add item'} onClick={addItem}/>
-        </form>
-        <p className="topBlock-text">Mouse Right Click - delete item</p>
-      </div>
-      <div className="items">
-        { items.map( (item : any, index : number) => <div className="item" key={index} onContextMenu={delItem.bind(index, index)}>
-          <h3 className={'item-title'}>{ item.name.length < 1 ? 'Name' : item.name }</h3>
+          <ToDoInput type="text" name="occupation" id="occupation" value={occupation} placeholder={'Occupation'} onChange={onChangeOccupation} required />
+          <ToDoErrorBlock className={blockClass}></ToDoErrorBlock>
+          <ToDoButton type="submit" name="submit" id="submit" value={'Add item'} onClick={addItem}/>
+        </ToDoForm>
+        <p>Mouse Right Click - delete item</p>
+      </ToDoTopBlock>
+      <ToDoItems>
+        { items.map( (item : any, index : number) => <ToDoItem key={index} onContextMenu={delItem.bind(index, index)}>
+          <h3>{ item.name.length < 1 ? 'Name' : item.name }</h3>
           <p className={'item-age'}>{ item.age.length < 1 ? 0 : item.age }</p>
           <p className={'item-occupation'}>{ item.occupation.length < 1 ? 'Occupation' : item.occupation }</p>
-        </div> ) }
-      </div>
-    </div>
+        </ToDoItem> ) }
+      </ToDoItems>
+    </ToDoWrapper>
   );
 }
 

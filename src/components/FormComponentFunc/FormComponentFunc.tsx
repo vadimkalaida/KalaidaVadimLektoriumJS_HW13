@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react'
-import './FormComponentFunc.scss'
+import '../../App.scss';
 import { ContentForm, FormInput, FormButton, ErrorBlockForm } from "./elements";
 
 const FormComponentFunc: React.FC = () => {
@@ -13,7 +13,7 @@ const FormComponentFunc: React.FC = () => {
   const [passwordError, setPasswordError] : React.ComponentState = useState('');
   const [passwordConfirm, setPasswordConfirm] : React.ComponentState = useState('');
   const [passwordConfirmError, setPasswordConfirmError] : React.ComponentState = useState('');
-  const [errorBlockForm, setErrorBlockForm] : React.ComponentState = useState('errorBlockForm');
+  const [errorBlockForm, setErrorBlockForm] : React.ComponentState = useState('ErrorBlock');
   const informationArr : Array<object> = [];
   const emailTestString : RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const testLetters : RegExp = /[a-zA-Z]/;
@@ -26,14 +26,14 @@ const FormComponentFunc: React.FC = () => {
   useEffect(() => {
     if(username.length < 4 || username.length > 16) {
       setUsernameError('Username length should be 4 - 16');
-      setErrorBlockForm('errorBlockForm');
+      setErrorBlockForm('ErrorBlock');
     } else if(!testLetters.test(username)) {
       setUsernameError('only ENGLISH');
-      setErrorBlockForm('errorBlockForm');
+      setErrorBlockForm('ErrorBlock');
     }
     else {
       setUsernameError('');
-      setErrorBlockForm('errorBlockFormNo');
+      setErrorBlockForm('ErrorBlockNo');
     }
   }, [username, testNumbers, testLetters]);
 
@@ -44,10 +44,10 @@ const FormComponentFunc: React.FC = () => {
   useEffect(() => {
     if(!emailTestString.test(email)) {
       setEmailError('Email should looks like "example1@gmail.com"');
-      setErrorBlockForm('errorBlockForm');
+      setErrorBlockForm('ErrorBlock');
     } else {
       setEmailError('');
-      setErrorBlockForm('errorBlockFormNo');
+      setErrorBlockForm('ErrorBlockNo');
     }
   }, [email, emailTestString]);
 
@@ -58,15 +58,15 @@ const FormComponentFunc: React.FC = () => {
   useEffect(() => {
     if(testNumbers.test(phone) && phone.length >= 7 && phone.length <= 16 && !testLetters.test(phone)) {
       setPhoneError('');
-      setErrorBlockForm('errorBlockFormNo');
+      setErrorBlockForm('ErrorBlockNo');
     } else {
       setPhoneError('Phone NUMBER should looks like "+380112881884" without plus');
-      setErrorBlockForm('errorBlockForm');
+      setErrorBlockForm('ErrorBlock');
     }
     for(let i = 0; i < phone.length; i++) {
       if(phone[i] === '+') {
         setPhoneError('Phone NUMBER should looks like "+380112881884" without plus');
-        setErrorBlockForm('errorBlockForm');
+        setErrorBlockForm('ErrorBlock');
       }
     }
   }, [phone, testNumbers, testLetters]);
@@ -78,10 +78,10 @@ const FormComponentFunc: React.FC = () => {
   useEffect(() => {
     if(testLetters.test(password) && testNumbers.test(password) && password.length >= 6 && password.length <= 18) {
       setPasswordError('');
-      setErrorBlockForm('errorBlockFormNo');
+      setErrorBlockForm('ErrorBlockNo');
     } else {
       setPasswordError('Password length should be 8 - 18, has uppercase and lowercase letters and does not have spaces');
-      setErrorBlockForm('errorBlockForm');
+      setErrorBlockForm('ErrorBlock');
     }
   }, [password, testNumbers, testLetters]);
 
@@ -92,13 +92,13 @@ const FormComponentFunc: React.FC = () => {
   useEffect(() => {
     if(passwordConfirm === '') {
       setPasswordConfirmError('Please confirm your password');
-      setErrorBlockForm('errorBlockForm');
+      setErrorBlockForm('ErrorBlock');
     } else if(passwordConfirm !== password) {
       setPasswordConfirmError('Passwords should be identical');
-      setErrorBlockForm('errorBlockForm');
+      setErrorBlockForm('ErrorBlock');
     } else {
       setPasswordConfirmError('');
-      setErrorBlockForm('errorBlockFormNo');
+      setErrorBlockForm('ErrorBlockNo');
     }
   }, [password, passwordConfirm]);
 

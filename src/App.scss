@@ -10,3 +10,10 @@ body {
   font-family: 'Roboto', 'sans-serif';
   box-sizing: border-box;
 }
+
+.ErrorBlock {
+  display: block;
+  &No {
+    display: none;
+  }
+}
